@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Hafsteinn</title>
+ <link href="http://haffi112.github.io/atom.xml" rel="self"/>
+ <link href="http://haffi112.github.io/"/>
+ <updated>2016-03-31T20:53:34+02:00</updated>
+ <id>http://haffi112.github.io</id>
+ <author>
+   <name>Hafsteinn Einarsson</name>
+   <email>haffie@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Bootstrap Percolation</title>
+   <link href="http://haffi112.github.io/2016/03/27/bootstrap-percolation/"/>
+   <updated>2016-03-27T00:00:00+01:00</updated>
+   <id>http://haffi112.github.io/2016/03/27/bootstrap-percolation</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;Bootstrap percolation&lt;/em&gt; (also known as iterative retrieval) is a simple
+model for the spread of activity in a graph/network. The vertices in the
+process have two states, either they are &lt;em&gt;active&lt;/em&gt; or &lt;em&gt;inactive&lt;/em&gt;. The
+process traditionally proceeds in rounds. Let &lt;em&gt;K&lt;/em&gt;&amp;gt;0 be a threshold
+parameter. In any given round all inactive vertices turn active which
+have at least &lt;em&gt;K&lt;/em&gt; active neighbours from previous rounds. Once a vertex
+turns active it remains active for the rest of the process. The
+&lt;em&gt;bootstrap&lt;/em&gt; just refers to the set of initially active vertices and
+&lt;em&gt;percolation&lt;/em&gt; refers to this spread of activity.&lt;/p&gt;
+
+&lt;p&gt;This is the most common definition but there are also some variations of
+the process which I will not cover in this post. When a vertex turns
+active in the description above you can think of it as the vertex
+telling all its neighbours that it turned active and this &lt;em&gt;message&lt;/em&gt;
+takes one round to be delivered. The process has been used to model
+various phenomena where the &lt;em&gt;messages&lt;/em&gt; have for example been interpreted
+as&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;spikes in neural networks,&lt;/li&gt;
+  &lt;li&gt;rumours or opinions in social networks and&lt;/li&gt;
+  &lt;li&gt;defaults in a loan network.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I was fortunate to work on a couple of projects involving
+bootstrap percolation during my PhD [cite].&lt;/p&gt;
+
+&lt;div id=&quot;mynetwork&quot; style=&quot;max-width: 720px; height: 720px;border: 1px solid lightgray;&quot;&gt;&lt;/div&gt;
+
+&lt;form onsubmit=&quot;draw(); return false;&quot; style=&quot;margin-bottom:20px&quot;&gt;
+&lt;table style=&quot;max-width: 720px; font-size:75%; margin-bottom:10px&quot;&gt;
+&lt;tr&gt;
+  &lt;td&gt;
+    &lt;label for=&quot;nodeCount&quot;&gt;Number of nodes&lt;/label&gt;
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;25&quot; style=&quot;width: 50px;&quot; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;
+    &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree&lt;/label&gt;
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;input id=&quot;nNeighbours&quot; type=&quot;text&quot; value=&quot;5&quot; style=&quot;width: 50px;&quot; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;
+    &lt;label for=&quot;kPerc&quot;&gt;Percolation threshold&lt;/label&gt;
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;input id=&quot;kPerc&quot; type=&quot;text&quot; value=&quot;2&quot; style=&quot;width: 50px;&quot; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;
+  &lt;label for=&quot;pBootstrap&quot;&gt;Bootstrap probability&lt;/label&gt;
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;input id=&quot;pBootstrap&quot; type=&quot;text&quot; value=&quot;0.2&quot; style=&quot;width: 50px;&quot; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;
+    &lt;label for=&quot;timeStep&quot;&gt;Time step (ms)&lt;/label&gt;
+  &lt;/td&gt;
+  &lt;td&gt;
+    &lt;input id=&quot;timeStep&quot; type=&quot;text&quot; value=&quot;1000&quot; style=&quot;width: 50px;&quot; /&gt;
+  &lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+  &lt;input type=&quot;button&quot; value=&quot;Build graph&quot; onclick=&quot;draw()&quot; /&gt;
+  &lt;input type=&quot;button&quot; value=&quot;Percolate&quot; onclick=&quot;percolate()&quot; /&gt;
+&lt;/form&gt;
+
+&lt;p class=&quot;message&quot; id=&quot;message&quot; style=&quot;visibility:hidden;&quot;&gt;
+
+&lt;p&gt;
+
+
+&lt;!--
+&lt;script type=&quot;text/javascript&quot;&gt;
+  var nodes = null;
+  var edges = null;
+  var network = null;
+  var data = null;
+
+  function destroy() {
+    if (network !== null) {
+      network.destroy();
+      network = null;
+    }
+  }
+
+  function parameter_check() {
+    var nodeCount = document.getElementById(&#39;nodeCount&#39;).value;
+    var nNeighbours = document.getElementById(&#39;nNeighbours&#39;).value;
+    var pBootstrap = document.getElementById(&#39;pBootstrap&#39;).value;
+    var kPerc = document.getElementById(&#39;kPerc&#39;).value;
+    var time_step = document.getElementById(&#39;timeStep&#39;).value;
+    if(+nodeCount &lt; 0) {
+      var warning = document.getElementById(&quot;message&quot;);
+      warning.innerHTML = &#39;The number of nodes must be non-negative&#39;;
+      warning.style.visibility = &quot;visible&quot;;
+      warning.style.display = &#39;block&#39;;
+      return false;
+    }
+    else if((+nNeighbours &lt; 0) || (+nNeighbours &gt; +nodeCount)) {
+      var warning = document.getElementById(&quot;message&quot;);
+      warning.innerHTML = &#39;The number of neighbours must be from 0 to number of nodes&#39;;
+      warning.style.visibility = &quot;visible&quot;;
+      warning.style.display = &#39;block&#39;;
+      return false;
+    }
+    else if(+kPerc &lt; 1) {
+      var warning = document.getElementById(&quot;message&quot;);
+      warning.innerHTML = &#39;Percolation threshold must be at least 1&#39;;
+      warning.style.visibility = &quot;visible&quot;;
+      warning.style.display = &#39;block&#39;;
+      return false;
+    }
+    else if((+pBootstrap &gt; 1) || (+pBootstrap &lt; 0)) {
+      var warning = document.getElementById(&quot;message&quot;);
+      warning.innerHTML = &#39;Bootstrap probability must be in the range [0,1]&#39;;
+      warning.style.visibility = &quot;visible&quot;;
+      warning.style.display = &#39;block&#39;;
+      return false;
+    }
+    else if(+timeStep &lt; 0) {
+      var warning = document.getElementById(&quot;message&quot;);
+      warning.innerHTML = &#39;The time step must be non-negative&#39;;
+      warning.style.visibility = &quot;visible&quot;;
+      warning.style.display = &#39;block&#39;;
+      return false;
+    }
+    return true;
+  }
+
+  function draw(){
+    document.getElementById(&quot;message&quot;).style.visibility = &quot;hidden&quot;;
+    document.getElementById(&quot;message&quot;).style.display = &quot;none&quot;;
+    destroy();
+    if(!parameter_check()) {
+      return;
+    }
+    var nodeCount = document.getElementById(&#39;nodeCount&#39;).value;
+    var nNeighbours = document.getElementById(&#39;nNeighbours&#39;).value;
+    // create a network
+    var container = document.getElementById(&#39;mynetwork&#39;);
+    //var data = getScaleFreeNetwork(nodeCount);
+    data = getRandomNetwork(nodeCount,nNeighbours/nodeCount);
+    var options = {
+      physics: { stabilization: false },
+      edges:{smooth:{type:&#39;continuous&#39;}},
+      manipulation: {
+        enabled: false,
+        editNode: function(nodeData,callback) {
+          callback(nodeData);
+          },
+        editEdge: function(edgeData,callback) {
+          callback(edgeData);
+        }
+      }
+    };
+    var pBootstrap = document.getElementById(&#39;pBootstrap&#39;).value;
+    create_bootstrap(data.nodes, data.edges, pBootstrap);
+    network = new vis.Network(container, data, options);
+  }
+
+  function percolate() {
+    var K = document.getElementById(&#39;kPerc&#39;).value;
+    var time_step = document.getElementById(&#39;timeStep&#39;).value;
+    synchronous_percolation(data,K,time_step);
+  }
+
+  if (window.addEventListener) { // Mozilla, Netscape, Firefox
+    window.addEventListener(&#39;load&#39;, WindowLoad, false);
+  } else if (window.attachEvent) { // IE
+    window.attachEvent(&#39;onload&#39;, WindowLoad);
+  }
+
+  function WindowLoad(event) {
+    draw();
+  }
+  &lt;/script&gt;
+--&gt;
+&lt;/p&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>
