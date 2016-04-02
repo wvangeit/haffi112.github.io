@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-03-31T20:53:34+02:00</updated>
+ <updated>2016-04-02T18:38:56+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -17,7 +17,71 @@
    <link href="http://haffi112.github.io/2016/03/27/bootstrap-percolation/"/>
    <updated>2016-03-27T00:00:00+01:00</updated>
    <id>http://haffi112.github.io/2016/03/27/bootstrap-percolation</id>
-   <content type="html">&lt;p&gt;&lt;em&gt;Bootstrap percolation&lt;/em&gt; (also known as iterative retrieval) is a simple
+   <content type="html">&lt;p&gt;If you have ever heard about
+&lt;em&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Percolation&quot; title=&quot;Percolation on
+Wikipedia&quot;&gt;percolation&lt;/a&gt;&lt;/em&gt; it might have been in the context of making coffee. That
+is, when brewing by filtering water through grinded coffee beans it is a
+desireable feature that the water can eventually pass through.
+Consequently the particles need to be large enough for the material to
+be porous and for the water to &lt;em&gt;percolate&lt;/em&gt; through. This article is not
+about brewing coffee unless you want to get really creative but bear in
+mind that copious amounts of caffeine were part of its creative process
+regardless.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;So what kind of percolation are you talking about then? Please ELI5.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Imagine that your friend just got a new shiny toy. He shows it to you,
+you are amazed and you express to your parents how your whole mental
+model of what is important in the world has radically changed. You
+parents resist, you are torn and broken but life goes on. Suddenly more
+of your friends get this new toy. The situation becomes different, you
+are now a social outcast, your status has been reduced to that of a
+pawn. Nobody plays with you anymore, you are a tribe of one, the old
+toys are worthless. You are now dressing in black and wearing white make
+up. The staff at the kindergarten start getting worried when you start
+chanting dark summoning rituals in recess. Eventually, after realising
+antidepressants are not an efficient treatment for this condition, your
+parents give in to societal pressures and buy you the new toy. The
+balance of the world is restored.&lt;/p&gt;
+
+&lt;p&gt;You probably already made the connection of how this short example
+relates to brewing coffee. If not let me explain. Think of yourself as
+an empty cell defined by the finely grained coffee bean particles around
+you. If it is not too disturbing you can think of your friends as
+adjacent cells. When one of your friends got a new toy in this analogy
+their cell was filled with water. For a single adjacent cell full of
+water the pressure is not sufficient for the water to enter your cell
+but once enough many adjacent cells get filled yours gets filled as
+well.&lt;/p&gt;
+
+&lt;p&gt;So you see, percolation has something to do with the dissemination of
+information in a network. Some other good examples are gossip and rumor
+spreading as well as advertising campaigns – it is important to know
+which individuals in a social network one should pay to advertise a
+product in order to reach as many potential customers as possible (you
+can start throwing your free products at me now). It is also valuable to
+know if a banking network is stable and how many individuals need to
+default on their loans for the network to collapse &lt;a href=&quot;#amini2014inhomogeneous&quot;&gt;(Amini &amp;amp; Minca, 2014)&lt;/a&gt;. Another great example is the spread of
+diseases. For every encounter with an infected individual the chances
+of becoming infected increase. My favorite example of bootstrap
+percolation is the way neurons communicate in the brain. Neurons
+communcate by sending
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Neural_coding&quot;&gt;spikes&lt;/a&gt; to their
+neighbors. If a neuron receives enough many spikes it will also spike
+and thus inform all of its neighbors, quite amazing. Finally
+percolation can be described by a &lt;a href=&quot;https://en.wikipedia.org/wiki/Cellular_automaton&quot;&gt;cellular
+automaton&lt;/a&gt; which is
+the setting in which it was first studied &lt;a href=&quot;#chalupa1979bootstrap&quot;&gt;(Chalupa, Leath, &amp;amp; Reich, 1979)&lt;/a&gt; (but motivated by physics) and since then it has been
+extensively studied on the grid in arbitrarily many dimensions &lt;a href=&quot;#balogh2012sharp&quot;&gt;(Balogh, Bollobás, Duminil-Copin, &amp;amp; Morris, 2012)&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As you might have realised percolation is literally everywhere around
+us. It is therefore not surprising how interest in it has percolated.
+Below I will define more formally the process. This is where things
+start to get just slightly technical. In case you want to skip the
+technical parts just scroll down to the bottom of the article to play
+with the javascript simulation.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Bootstrap percolation&lt;/em&gt; (also known as iterative retrieval) is a simple
 model for the spread of activity in a graph/network. The vertices in the
 process have two states, either they are &lt;em&gt;active&lt;/em&gt; or &lt;em&gt;inactive&lt;/em&gt;. The
 process traditionally proceeds in rounds. Let &lt;em&gt;K&lt;/em&gt;&amp;gt;0 be a threshold
@@ -31,18 +95,29 @@ turns active it remains active for the rest of the process. The
 the process which I will not cover in this post. When a vertex turns
 active in the description above you can think of it as the vertex
 telling all its neighbours that it turned active and this &lt;em&gt;message&lt;/em&gt;
-takes one round to be delivered. The process has been used to model
-various phenomena where the &lt;em&gt;messages&lt;/em&gt; have for example been interpreted
-as&lt;/p&gt;
+takes one round to be delivered.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;spikes in neural networks,&lt;/li&gt;
-  &lt;li&gt;rumours or opinions in social networks and&lt;/li&gt;
-  &lt;li&gt;defaults in a loan network.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;Generally the process is studied formally on some specific graph classes
+where as I mention above the lattice was the first candidate. I’ve been
+fortunate to work with some amazing people on a couple of projects
+involving bootstrap percolation &lt;a href=&quot;#einarsson2014bootstrap&quot;&gt;(Einarsson, Lengler, Panagiotou, Mousset, &amp;amp; Steger, 2014)&lt;/a&gt; which
+will be the topic of a future post. Our study was sparked by the results
+by Janson, Luczak, Turova and Vallier &lt;a href=&quot;#janson2012bootstrap&quot;&gt;(Janson, Łuczak, Turova, Vallier, &amp;amp; others, 2012)&lt;/a&gt;
+which analysed bootstrap percolation, the process above, on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Erdős–Rényi_model&quot;&gt;Erdös
+Renyi random graph&lt;/a&gt;.
+The random graph is quite simple, each edge is present independently
+with some probability &lt;em&gt;p&lt;/em&gt; which is a parameter of the model. For &lt;em&gt;n&lt;/em&gt;
+vertices the expected number of neighbors is thus &lt;em&gt;np&lt;/em&gt;. Janson et. al
+discovered that percolation has a &lt;em&gt;threshold property&lt;/em&gt; on the random
+graph. If the bootstrap is below the threshold then almost no additional
+vertices turn active. But if it is above the threshold the activity
+percolates, that is almost every vertex turns active.&lt;/p&gt;
 
-&lt;p&gt;I was fortunate to work on a couple of projects involving
-bootstrap percolation during my PhD [cite].&lt;/p&gt;
+&lt;p&gt;You can play with the process on the random graph below. The parameters
+can be chosen below and additionally you can turn the vertices between
+an active and inactive state by clicking on them. The simulation was
+made with &lt;a href=&quot;http://visjs.org&quot;&gt;visjs&lt;/a&gt; and the code is available on my
+github page.&lt;/p&gt;
 
 &lt;div id=&quot;mynetwork&quot; style=&quot;max-width: 720px; height: 720px;border: 1px solid lightgray;&quot;&gt;&lt;/div&gt;
 
@@ -50,7 +125,7 @@ bootstrap percolation during my PhD [cite].&lt;/p&gt;
 &lt;table style=&quot;max-width: 720px; font-size:75%; margin-bottom:10px&quot;&gt;
 &lt;tr&gt;
   &lt;td&gt;
-    &lt;label for=&quot;nodeCount&quot;&gt;Number of nodes&lt;/label&gt;
+  &lt;label for=&quot;nodeCount&quot;&gt;Number of vertices (&lt;i&gt;n&lt;/i&gt;)&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;25&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -58,7 +133,7 @@ bootstrap percolation during my PhD [cite].&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-    &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree&lt;/label&gt;
+  &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree (&lt;i&gt;np&lt;/i&gt;)&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;nNeighbours&quot; type=&quot;text&quot; value=&quot;5&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -66,7 +141,7 @@ bootstrap percolation during my PhD [cite].&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-    &lt;label for=&quot;kPerc&quot;&gt;Percolation threshold&lt;/label&gt;
+  &lt;label for=&quot;kPerc&quot;&gt;Percolation threshold (&lt;i&gt;K&lt;/i&gt;)&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;kPerc&quot; type=&quot;text&quot; value=&quot;2&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -74,7 +149,7 @@ bootstrap percolation during my PhD [cite].&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-  &lt;label for=&quot;pBootstrap&quot;&gt;Bootstrap probability&lt;/label&gt;
+  &lt;label for=&quot;pBootstrap&quot;&gt;Probability of being in bootstrap&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;pBootstrap&quot; type=&quot;text&quot; value=&quot;0.2&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -82,7 +157,7 @@ bootstrap percolation during my PhD [cite].&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-    &lt;label for=&quot;timeStep&quot;&gt;Time step (ms)&lt;/label&gt;
+  &lt;label for=&quot;timeStep&quot;&gt;Time step length in milliseconds (1000 &lt;i&gt;ms&lt;/i&gt; = 1 second)&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;timeStep&quot; type=&quot;text&quot; value=&quot;1000&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -95,116 +170,16 @@ bootstrap percolation during my PhD [cite].&lt;/p&gt;
 
 &lt;p class=&quot;message&quot; id=&quot;message&quot; style=&quot;visibility:hidden;&quot;&gt;
 
-&lt;p&gt;
+&lt;/p&gt;
 
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
-&lt;!--
-&lt;script type=&quot;text/javascript&quot;&gt;
-  var nodes = null;
-  var edges = null;
-  var network = null;
-  var data = null;
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;amini2014inhomogeneous&quot;&gt;Amini, H., &amp;amp; Minca, A. (2014). Inhomogeneous Financial Networks and Contagious Links. &lt;i&gt;Available At SSRN&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;chalupa1979bootstrap&quot;&gt;Chalupa, J., Leath, P. L., &amp;amp; Reich, G. R. (1979). Bootstrap percolation on a Bethe lattice. &lt;i&gt;Journal Of Physics C: Solid State Physics&lt;/i&gt;, &lt;i&gt;12&lt;/i&gt;(1), L31.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;balogh2012sharp&quot;&gt;Balogh, J., Bollobás, B., Duminil-Copin, H., &amp;amp; Morris, R. (2012). The sharp threshold for bootstrap percolation in all dimensions. &lt;i&gt;Transactions Of the American Mathematical Society&lt;/i&gt;, &lt;i&gt;364&lt;/i&gt;(5), 2667–2701.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., Vallier, T., &amp;amp; others. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
 
-  function destroy() {
-    if (network !== null) {
-      network.destroy();
-      network = null;
-    }
-  }
-
-  function parameter_check() {
-    var nodeCount = document.getElementById(&#39;nodeCount&#39;).value;
-    var nNeighbours = document.getElementById(&#39;nNeighbours&#39;).value;
-    var pBootstrap = document.getElementById(&#39;pBootstrap&#39;).value;
-    var kPerc = document.getElementById(&#39;kPerc&#39;).value;
-    var time_step = document.getElementById(&#39;timeStep&#39;).value;
-    if(+nodeCount &lt; 0) {
-      var warning = document.getElementById(&quot;message&quot;);
-      warning.innerHTML = &#39;The number of nodes must be non-negative&#39;;
-      warning.style.visibility = &quot;visible&quot;;
-      warning.style.display = &#39;block&#39;;
-      return false;
-    }
-    else if((+nNeighbours &lt; 0) || (+nNeighbours &gt; +nodeCount)) {
-      var warning = document.getElementById(&quot;message&quot;);
-      warning.innerHTML = &#39;The number of neighbours must be from 0 to number of nodes&#39;;
-      warning.style.visibility = &quot;visible&quot;;
-      warning.style.display = &#39;block&#39;;
-      return false;
-    }
-    else if(+kPerc &lt; 1) {
-      var warning = document.getElementById(&quot;message&quot;);
-      warning.innerHTML = &#39;Percolation threshold must be at least 1&#39;;
-      warning.style.visibility = &quot;visible&quot;;
-      warning.style.display = &#39;block&#39;;
-      return false;
-    }
-    else if((+pBootstrap &gt; 1) || (+pBootstrap &lt; 0)) {
-      var warning = document.getElementById(&quot;message&quot;);
-      warning.innerHTML = &#39;Bootstrap probability must be in the range [0,1]&#39;;
-      warning.style.visibility = &quot;visible&quot;;
-      warning.style.display = &#39;block&#39;;
-      return false;
-    }
-    else if(+timeStep &lt; 0) {
-      var warning = document.getElementById(&quot;message&quot;);
-      warning.innerHTML = &#39;The time step must be non-negative&#39;;
-      warning.style.visibility = &quot;visible&quot;;
-      warning.style.display = &#39;block&#39;;
-      return false;
-    }
-    return true;
-  }
-
-  function draw(){
-    document.getElementById(&quot;message&quot;).style.visibility = &quot;hidden&quot;;
-    document.getElementById(&quot;message&quot;).style.display = &quot;none&quot;;
-    destroy();
-    if(!parameter_check()) {
-      return;
-    }
-    var nodeCount = document.getElementById(&#39;nodeCount&#39;).value;
-    var nNeighbours = document.getElementById(&#39;nNeighbours&#39;).value;
-    // create a network
-    var container = document.getElementById(&#39;mynetwork&#39;);
-    //var data = getScaleFreeNetwork(nodeCount);
-    data = getRandomNetwork(nodeCount,nNeighbours/nodeCount);
-    var options = {
-      physics: { stabilization: false },
-      edges:{smooth:{type:&#39;continuous&#39;}},
-      manipulation: {
-        enabled: false,
-        editNode: function(nodeData,callback) {
-          callback(nodeData);
-          },
-        editEdge: function(edgeData,callback) {
-          callback(edgeData);
-        }
-      }
-    };
-    var pBootstrap = document.getElementById(&#39;pBootstrap&#39;).value;
-    create_bootstrap(data.nodes, data.edges, pBootstrap);
-    network = new vis.Network(container, data, options);
-  }
-
-  function percolate() {
-    var K = document.getElementById(&#39;kPerc&#39;).value;
-    var time_step = document.getElementById(&#39;timeStep&#39;).value;
-    synchronous_percolation(data,K,time_step);
-  }
-
-  if (window.addEventListener) { // Mozilla, Netscape, Firefox
-    window.addEventListener(&#39;load&#39;, WindowLoad, false);
-  } else if (window.attachEvent) { // IE
-    window.attachEvent(&#39;onload&#39;, WindowLoad);
-  }
-
-  function WindowLoad(event) {
-    draw();
-  }
-  &lt;/script&gt;
---&gt;
-&lt;/p&gt;&lt;/p&gt;
 </content>
  </entry>
  
