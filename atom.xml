@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-02T18:38:56+02:00</updated>
+ <updated>2016-04-02T18:49:19+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -115,9 +115,12 @@ percolates, that is almost every vertex turns active.&lt;/p&gt;
 
 &lt;p&gt;You can play with the process on the random graph below. The parameters
 can be chosen below and additionally you can turn the vertices between
-an active and inactive state by clicking on them. The simulation was
+an active and an inactive state by clicking on them. The simulation was
 made with &lt;a href=&quot;http://visjs.org&quot;&gt;visjs&lt;/a&gt; and the code is available on my
-github page.&lt;/p&gt;
+github page. Please note that at the moment the code scales
+quadratically in &lt;em&gt;n&lt;/em&gt; so simulations for large values of &lt;em&gt;n&lt;/em&gt; will be
+slow. Additionally the network layout has a hard time converging to a
+stable state when there are many vertices and the graph is not sparse.&lt;/p&gt;
 
 &lt;div id=&quot;mynetwork&quot; style=&quot;max-width: 720px; height: 720px;border: 1px solid lightgray;&quot;&gt;&lt;/div&gt;
 
