@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-02T18:49:19+02:00</updated>
+ <updated>2016-04-02T21:52:43+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -67,12 +67,12 @@ of becoming infected increase. My favorite example of bootstrap
 percolation is the way neurons communicate in the brain. Neurons
 communcate by sending
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Neural_coding&quot;&gt;spikes&lt;/a&gt; to their
-neighbors. If a neuron receives enough many spikes it will also spike
-and thus inform all of its neighbors, quite amazing. Finally
+neighbors. If a neuron receives a couple of spike signals it will also
+spike and thus inform all of its neighbors, quite amazing. Finally
 percolation can be described by a &lt;a href=&quot;https://en.wikipedia.org/wiki/Cellular_automaton&quot;&gt;cellular
 automaton&lt;/a&gt; which is
-the setting in which it was first studied &lt;a href=&quot;#chalupa1979bootstrap&quot;&gt;(Chalupa, Leath, &amp;amp; Reich, 1979)&lt;/a&gt; (but motivated by physics) and since then it has been
-extensively studied on the grid in arbitrarily many dimensions &lt;a href=&quot;#balogh2012sharp&quot;&gt;(Balogh, Bollobás, Duminil-Copin, &amp;amp; Morris, 2012)&lt;/a&gt;.&lt;/p&gt;
+the setting in which it was first studied &lt;a href=&quot;#chalupa1979bootstrap&quot;&gt;(Chalupa, Leath, &amp;amp; Reich, 1979)&lt;/a&gt; (but motivated by physics) and since then it has been extensively
+studied on the grid in arbitrarily many dimensions &lt;a href=&quot;#balogh2012sharp&quot;&gt;(Balogh, Bollobás, Duminil-Copin, &amp;amp; Morris, 2012)&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;As you might have realised percolation is literally everywhere around
 us. It is therefore not surprising how interest in it has percolated.
@@ -136,7 +136,8 @@ stable state when there are many vertices and the graph is not sparse.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-  &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree (&lt;i&gt;np&lt;/i&gt;)&lt;/label&gt;
+  &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree (&lt;i&gt;np&lt;/i&gt;), average number
+  of neighbors&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;nNeighbours&quot; type=&quot;text&quot; value=&quot;5&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -144,7 +145,7 @@ stable state when there are many vertices and the graph is not sparse.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-  &lt;label for=&quot;kPerc&quot;&gt;Percolation threshold (&lt;i&gt;K&lt;/i&gt;)&lt;/label&gt;
+  &lt;label for=&quot;kPerc&quot;&gt;Activation threshold (&lt;i&gt;K&lt;/i&gt;)&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;kPerc&quot; type=&quot;text&quot; value=&quot;2&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -152,7 +153,7 @@ stable state when there are many vertices and the graph is not sparse.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
   &lt;td&gt;
-  &lt;label for=&quot;pBootstrap&quot;&gt;Probability of being in bootstrap&lt;/label&gt;
+  &lt;label for=&quot;pBootstrap&quot;&gt;Probability of being in the bootstrap&lt;/label&gt;
   &lt;/td&gt;
   &lt;td&gt;
     &lt;input id=&quot;pBootstrap&quot; type=&quot;text&quot; value=&quot;0.2&quot; style=&quot;width: 50px;&quot; /&gt;
