@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-02T21:52:43+02:00</updated>
+ <updated>2016-04-02T21:58:55+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -175,6 +175,10 @@ stable state when there are many vertices and the graph is not sparse.&lt;/p&gt;
 &lt;p class=&quot;message&quot; id=&quot;message&quot; style=&quot;visibility:hidden;&quot;&gt;
 
 &lt;/p&gt;
+
+&lt;h2 id=&quot;acknowledgements&quot;&gt;Acknowledgements&lt;/h2&gt;
+&lt;p&gt;Thanks to &lt;a href=&quot;http://www2.compute.dtu.dk/~guei/&quot;&gt;Guðmundur&lt;/a&gt; for reading a
+draft of this post.&lt;/p&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
