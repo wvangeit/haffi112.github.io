@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-23T13:49:15+02:00</updated>
+ <updated>2016-04-23T13:51:24+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -33,7 +33,7 @@ In the synchronous setting  we had to wait for one round until they
 arrived, corresponding to a time delay of 1. In the asynchronous setting
 these delays can be arbitrary. In &lt;a href=&quot;#einarsson2014bootstrap&quot;&gt;(Einarsson, Lengler, Panagiotou, Mousset, &amp;amp; Steger, 2014)&lt;/a&gt; we
 studied for instance the case when all the edges draw their delay from
-an exponential distribution with expected delay 1. Recall that as in &lt;a href=&quot;#janson2012bootstrap&quot;&gt;(Janson, Łuczak, Turova, &amp;amp; Vallier, 2012)&lt;/a&gt; we studied the process on &lt;script type=&quot;math/tex&quot;&gt;G_{n,p}&lt;/script&gt;. The
+an exponential distribution with expected delay 1. Recall that as in &lt;a href=&quot;#janson2012bootstrap&quot;&gt;(Janson, Łuczak, Turova, &amp;amp; Vallier, 2012)&lt;/a&gt; we studied the process on &lt;script type=&quot;math/tex&quot;&gt;G_{n,p}&lt;/script&gt;, the
 Erdős–Rényi &lt;a href=&quot;https://en.wikipedia.org/wiki/Erdős–Rényi_model&quot;&gt;random
 graph&lt;/a&gt; model. As it
 turned out, such a slight modification had an interesting quantitative
