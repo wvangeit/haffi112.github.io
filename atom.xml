@@ -4,13 +4,125 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-08T21:09:08+02:00</updated>
+ <updated>2016-04-23T13:46:52+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
    <email>haffie@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Asynchronous Bootstrap Percolation</title>
+   <link href="http://haffi112.github.io/2016/04/08/asynchronous-percolation/"/>
+   <updated>2016-04-08T00:00:00+02:00</updated>
+   <id>http://haffi112.github.io/2016/04/08/asynchronous-percolation</id>
+   <content type="html">&lt;p&gt;In the &lt;a href=&quot;/2016/03/27/bootstrap-percolation/&quot;&gt;previous post&lt;/a&gt;
+we discussed bootstrap percolation, a process which models the
+disseminaiton of information in a graph. In this post we will see a
+slight variation of the process. Percolation is traditionally defined to
+be round based. However, in reality processes such as rumor spreading,
+disease transmission and neural signals are usually not synchronous.
+This leads to an asynchronous variant of the process (scroll down if you
+are eager to see the visualisation).&lt;/p&gt;
+
+&lt;p&gt;As before, when a vertex turns active, you can think of it as sending a
+message to all its neighbours notifying them of its new state (or
+infecting them with some disease). The messages do not arrive instantly.
+In the synchronous setting  we had to wait for one round until they
+arrived, corresponding to a time delay of 1. In the asynchronous setting
+these delays can be arbitrary. In &lt;a href=&quot;#einarsson2014bootstrap&quot;&gt;(Einarsson, Lengler, Panagiotou, Mousset, &amp;amp; Steger, 2014)&lt;/a&gt; we
+studied for instance the case when all the edges draw their delay from
+an exponential distribution with expected delay 1. Recall that as in &lt;a href=&quot;#janson2012bootstrap&quot;&gt;(Janson, Łuczak, Turova, &amp;amp; Vallier, 2012)&lt;/a&gt; we studied the process on &lt;script type=&quot;math/tex&quot;&gt;G_{n,p}&lt;/script&gt;. The
+Erdős–Rényi &lt;a href=&quot;https://en.wikipedia.org/wiki/Erdős–Rényi_model&quot;&gt;random
+graph&lt;/a&gt; model. As it
+turned out, such a slight modification had an interesting quantitative
+effect on the process. The activity percolated much faster!&lt;/p&gt;
+
+&lt;p&gt;We showed that asymptotically such a process requires only constant time
+in expectation to activate all the vertices whereas the synchronous
+process can require up to &lt;script type=&quot;math/tex&quot;&gt;\sim\log\log(np)&lt;/script&gt; rounds in expectation.
+This improved speed is due to the fact that once enough many messages
+are being delivered almost certainly some of them will be extremely fast
+which further fuels the process. You can think of the process in terms
+of three phases, the &lt;em&gt;startup phase&lt;/em&gt;, which decides if the activity
+survives or not, the &lt;em&gt;explosion phase&lt;/em&gt; where almost all the vertices
+turn active (and is the main contributor to the double exponential speed
+of the round based process) and finally the &lt;em&gt;clean up phase&lt;/em&gt; where the
+last few vertices turn active. In our setting the explosion phase is
+instantaneous, formally it takes time &lt;script type=&quot;math/tex&quot;&gt;o(1)&lt;/script&gt; (less than constant) to
+activate almost all the vertices (after the initial hurdle of getting
+the process started).&lt;/p&gt;
+
+&lt;p&gt;Below you can see an implementation of asynchronous bootstrap
+percolation where the expected delay of a message is initially set to
+five seconds (you can play with the parameters in the box below, be
+warned though, too many vertices can slow down the performance). If you
+choose the parameters nicely you will notice that the slow messages are
+usually too slow to make any difference. The simulation was made using
+&lt;a href=&quot;https://d3js.org&quot;&gt;d3js&lt;/a&gt;. Since javascript is asynchronous it is a
+perfect candidate to perform these simulations.&lt;/p&gt;
+
+&lt;div id=&quot;simulation&quot;&gt;
+&lt;/div&gt;
+
+&lt;form onsubmit=&quot;create_graph(); return false;&quot; style=&quot;margin-bottom:20px&quot;&gt;
+  &lt;input type=&quot;button&quot; value=&quot;Build graph&quot; onclick=&quot;create_graph()&quot; /&gt;
+  &lt;input type=&quot;button&quot; value=&quot;Percolate&quot; onclick=&quot;percolate()&quot; /&gt;
+  &lt;table style=&quot;max-width: 720px; font-size:75%; margin-bottom:10px&quot;&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;nodeCount&quot;&gt;Number of vertices (&lt;i&gt;n&lt;/i&gt;)&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree (&lt;i&gt;np&lt;/i&gt;), average number
+    of neighbors&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;nNeighbours&quot; type=&quot;text&quot; value=&quot;6&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;kPerc&quot;&gt;Activation threshold (&lt;i&gt;K&lt;/i&gt;)&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;kPerc&quot; type=&quot;text&quot; value=&quot;2&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;pBootstrap&quot;&gt;Probability of being in the bootstrap&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;pBootstrap&quot; type=&quot;text&quot; value=&quot;0.2&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;delay&quot;&gt;Expected edge delay (seconds)&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;delay&quot; type=&quot;text&quot; value=&quot;5.0&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+
+&lt;p class=&quot;message&quot; id=&quot;message&quot; style=&quot;visibility:hidden;&quot;&gt;
+
+&lt;/p&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+
+</content>
+ </entry>
  
  <entry>
    <title>Bootstrap Percolation</title>
@@ -110,7 +222,7 @@ where as I mention above the lattice was the first candidate. I’ve been
 fortunate to work with some amazing people on a couple of projects
 involving bootstrap percolation &lt;a href=&quot;#einarsson2014bootstrap&quot;&gt;(Einarsson, Lengler, Panagiotou, Mousset, &amp;amp; Steger, 2014)&lt;/a&gt; which
 will be the topic of a future post. Our study was sparked by the results
-by Janson, Luczak, Turova and Vallier &lt;a href=&quot;#janson2012bootstrap&quot;&gt;(Janson, Łuczak, Turova, Vallier, &amp;amp; others, 2012)&lt;/a&gt;
+by Janson, Luczak, Turova and Vallier &lt;a href=&quot;#janson2012bootstrap&quot;&gt;(Janson, Łuczak, Turova, &amp;amp; Vallier, 2012)&lt;/a&gt;
 which analysed bootstrap percolation, the process above, on the &lt;a href=&quot;https://en.wikipedia.org/wiki/Erdős–Rényi_model&quot;&gt;Erdös
 Renyi random graph&lt;/a&gt;.
 The random graph is quite simple, each edge is present independently
@@ -194,7 +306,7 @@ draft of this post.&lt;/p&gt;
 &lt;li&gt;&lt;span id=&quot;chalupa1979bootstrap&quot;&gt;Chalupa, J., Leath, P. L., &amp;amp; Reich, G. R. (1979). Bootstrap percolation on a Bethe lattice. &lt;i&gt;Journal Of Physics C: Solid State Physics&lt;/i&gt;, &lt;i&gt;12&lt;/i&gt;(1), L31.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;balogh2012sharp&quot;&gt;Balogh, J., Bollobás, B., Duminil-Copin, H., &amp;amp; Morris, R. (2012). The sharp threshold for bootstrap percolation in all dimensions. &lt;i&gt;Transactions Of the American Mathematical Society&lt;/i&gt;, &lt;i&gt;364&lt;/i&gt;(5), 2667–2701.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., Vallier, T., &amp;amp; others. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
 
 </content>
  </entry>
