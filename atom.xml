@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-23T13:47:42+02:00</updated>
+ <updated>2016-04-23T13:49:15+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -117,6 +117,8 @@ perfect candidate to perform these simulations.&lt;/p&gt;
 &lt;p class=&quot;message&quot; id=&quot;message&quot; style=&quot;visibility:hidden;&quot;&gt;
 
 &lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
