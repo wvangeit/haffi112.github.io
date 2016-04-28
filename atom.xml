@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-23T14:00:34+02:00</updated>
+ <updated>2016-04-28T22:27:55+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -13,7 +13,112 @@
 
  
  <entry>
-   <title>Asynchronous Bootstrap Percolation</title>
+   <title>Percolation with inhibition - part 1</title>
+   <link href="http://haffi112.github.io/2016/04/25/percolation-with-inhibition/"/>
+   <updated>2016-04-25T00:00:00+02:00</updated>
+   <id>http://haffi112.github.io/2016/04/25/percolation-with-inhibition</id>
+   <content type="html">&lt;p&gt;In the previous posts we have discussed &lt;a href=&quot;/2016/03/27/bootstrap-percolation/&quot;&gt;synchronous&lt;/a&gt; and &lt;a href=&quot;/2016/04/08/asynchronous-percolation/&quot;&gt;asynchronous&lt;/a&gt; bootstrap percolation, processes
+which model the dissemination of information in a graph.&lt;/p&gt;
+
+&lt;p&gt;In these previous models we only studied vertices which could excite
+their neighbours. This is a good basic model for the spread of diseases
+or gossip. However in other settings we might instead have competing
+forces. For instance the messages might represent product
+recommendations from friends. If all your friends recommend some brand
+you might be triggered to buy it. However, if some of your friends
+recommend another you might change your decision on what to buy or
+simply be confused. Similarly in the brain some of the neurons are
+excitatory and send positive messages while others are inhibitory and
+send negative messages. The inhibitory neurons are quite important
+because if excitation is abundant the activity can run out of control
+which can lead to epileptic seizures.&lt;/p&gt;
+
+&lt;p&gt;Thus it becomes natural to study the question what happens if instead we
+allowed some of the nodes to be negative? That is exactly what we did in
+&lt;a href=&quot;#einarsson2014bootstrap&quot;&gt;(Einarsson, Lengler, Panagiotou, Mousset, &amp;amp; Steger, 2014)&lt;/a&gt;. We made some interesting observations
+which I will highlight in follow up posts.&lt;/p&gt;
+
+&lt;p&gt;Below you can see an implementation of asynchronous bootstrap
+percolation with inhibition made with &lt;a href=&quot;https://d3js.org&quot;&gt;d3js&lt;/a&gt;. The
+green nodes send positive messages and the red nodes send negative
+messages. A vertex turns active (and remains active) if the number of
+positive vertices it has received ever exceeds the number of negative
+messages it has received by at least &lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;. You can try to control which
+fraction of the excitatory vertices turn active by changing the number
+of inhibitory neurons.&lt;/p&gt;
+
+&lt;div id=&quot;simulation&quot;&gt;
+&lt;/div&gt;
+
+&lt;form onsubmit=&quot;create_graph(); return false;&quot; style=&quot;margin-bottom:20px&quot;&gt;
+  &lt;input type=&quot;button&quot; value=&quot;Build graph&quot; onclick=&quot;create_graph()&quot; /&gt;
+  &lt;input type=&quot;button&quot; value=&quot;Percolate&quot; onclick=&quot;percolate()&quot; /&gt;
+  &lt;table style=&quot;max-width: 720px; font-size:75%; margin-bottom:10px&quot;&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;nodeCount&quot;&gt;Number of vertices&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;inodeCount&quot;&gt;Number of inhibitory &lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;inodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;nNeighbours&quot;&gt;Expected degree (&lt;i&gt;np&lt;/i&gt;), average number
+    of neighbors&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;nNeighbours&quot; type=&quot;text&quot; value=&quot;6&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;kPerc&quot;&gt;Activation threshold (&lt;i&gt;K&lt;/i&gt;)&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;kPerc&quot; type=&quot;text&quot; value=&quot;2&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;pBootstrap&quot;&gt;Probability of being in the bootstrap&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;pBootstrap&quot; type=&quot;text&quot; value=&quot;0.2&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;
+    &lt;label for=&quot;delay&quot;&gt;Expected edge delay (seconds)&lt;/label&gt;
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input id=&quot;delay&quot; type=&quot;text&quot; value=&quot;5.0&quot; style=&quot;width: 50px;&quot; /&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+
+&lt;p class=&quot;message&quot; id=&quot;message&quot; style=&quot;visibility:hidden;&quot;&gt;
+
+&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Asynchronous bootstrap percolation</title>
    <link href="http://haffi112.github.io/2016/04/08/asynchronous-percolation/"/>
    <updated>2016-04-08T00:00:00+02:00</updated>
    <id>http://haffi112.github.io/2016/04/08/asynchronous-percolation</id>
@@ -62,6 +167,9 @@ choose the parameters nicely you will notice that the slow messages are
 usually too slow to make any difference. The simulation was made using
 &lt;a href=&quot;https://d3js.org&quot;&gt;d3js&lt;/a&gt;. Since javascript is asynchronous it is a
 perfect candidate to perform these simulations.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;/2016/04/25/percolation-with-inhibition/&quot;&gt;next post&lt;/a&gt; extends this
+process with inhibitory vertices.&lt;/p&gt;
 
 &lt;div id=&quot;simulation&quot;&gt;
 &lt;/div&gt;
@@ -127,7 +235,7 @@ perfect candidate to perform these simulations.&lt;/p&gt;
  </entry>
  
  <entry>
-   <title>Bootstrap Percolation</title>
+   <title>Bootstrap percolation</title>
    <link href="http://haffi112.github.io/2016/03/27/bootstrap-percolation/"/>
    <updated>2016-03-27T00:00:00+01:00</updated>
    <id>http://haffi112.github.io/2016/03/27/bootstrap-percolation</id>
@@ -243,6 +351,9 @@ github page. Please note that at the moment the code scales
 quadratically in &lt;em&gt;n&lt;/em&gt; so simulations for large values of &lt;em&gt;n&lt;/em&gt; will be
 slow. Additionally the network layout has a hard time converging to a
 stable state when there are many vertices and the graph is not sparse.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&quot;/2016/04/08/asynchronous-percolation/&quot;&gt;next post&lt;/a&gt;
+discusses a variation of the process which is not round based.&lt;/p&gt;
 
 &lt;div id=&quot;mynetwork&quot; style=&quot;max-width: 720px; height: 720px;border: 1px solid lightgray;&quot;&gt;&lt;/div&gt;
 
