@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-04-28T22:27:55+02:00</updated>
+ <updated>2016-04-29T09:45:45+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -41,11 +41,15 @@ which I will highlight in follow up posts.&lt;/p&gt;
 &lt;p&gt;Below you can see an implementation of asynchronous bootstrap
 percolation with inhibition made with &lt;a href=&quot;https://d3js.org&quot;&gt;d3js&lt;/a&gt;. The
 green nodes send positive messages and the red nodes send negative
-messages. A vertex turns active (and remains active) if the number of
-positive vertices it has received ever exceeds the number of negative
-messages it has received by at least &lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;. You can try to control which
-fraction of the excitatory vertices turn active by changing the number
-of inhibitory neurons.&lt;/p&gt;
+messages. Each vertex keeps track of how many positive messages it has
+seen minus the number of negative vertices. We refer to this as the
+&lt;em&gt;potential&lt;/em&gt; of the vertex. A vertex turns active (and remains active) if
+its potential ever reaches &lt;script type=&quot;math/tex&quot;&gt;K&lt;/script&gt;. You can try to control which fraction
+of the green vertices turn active by changing the number of negative
+vertices. When the potential of a vertex becomes negative we color the
+vertex blue. Vertices which reach this state have a lower chance of ever
+turning active. They can but for most of them they are essentially
+frozen.&lt;/p&gt;
 
 &lt;div id=&quot;simulation&quot;&gt;
 &lt;/div&gt;
@@ -56,7 +60,7 @@ of inhibitory neurons.&lt;/p&gt;
   &lt;table style=&quot;max-width: 720px; font-size:75%; margin-bottom:10px&quot;&gt;
   &lt;tr&gt;
     &lt;td&gt;
-    &lt;label for=&quot;nodeCount&quot;&gt;Number of vertices&lt;/label&gt;
+    &lt;label for=&quot;nodeCount&quot;&gt;Number of positive vertices (green)&lt;/label&gt;
     &lt;/td&gt;
     &lt;td&gt;
       &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
@@ -64,7 +68,7 @@ of inhibitory neurons.&lt;/p&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
     &lt;td&gt;
-    &lt;label for=&quot;inodeCount&quot;&gt;Number of inhibitory &lt;/label&gt;
+    &lt;label for=&quot;inodeCount&quot;&gt;Number of negative vertices (red) &lt;/label&gt;
     &lt;/td&gt;
     &lt;td&gt;
       &lt;input id=&quot;inodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
