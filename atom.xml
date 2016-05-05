@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-05-05T22:10:11+02:00</updated>
+ <updated>2016-05-05T22:11:15+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -684,7 +684,7 @@ frozen.&lt;/p&gt;
     &lt;label for=&quot;delay&quot;&gt;Expected edge delay (seconds)&lt;/label&gt;
     &lt;/td&gt;
     &lt;td&gt;
-      &lt;input id=&quot;delay&quot; type=&quot;text&quot; value=&quot;5.0&quot; style=&quot;width: 50px;&quot; /&gt;
+      &lt;input id=&quot;delay&quot; type=&quot;text&quot; value=&quot;1.0&quot; style=&quot;width: 50px;&quot; /&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
