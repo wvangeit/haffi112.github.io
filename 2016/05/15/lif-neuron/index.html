@@ -160,11 +160,10 @@ It is inspired by
 <a href="https://en.wikipedia.org/wiki/Squid_giant_axon">experiments</a>, first
 carried out by
 <a href="https://en.wikipedia.org/wiki/Alan_Lloyd_Hodgkin">Hodgin</a> and
-<a href="https://en.wikipedia.org/wiki/Andrew_Huxley">Huxley</a> in the 1950s,
-which measure the voltage difference inside and outside a neuron. The
-model is quite simple, we can give some input to the neuron, in the form
-of an electrical current, and we can observe how the voltage across the
-membrane changes over time.</p>
+<a href="https://en.wikipedia.org/wiki/Andrew_Huxley">Huxley</a> in the 1950s <a href="#hodgkin1952quantitative">(Hodgkin &amp; Huxley, 1952)</a>, which measure the voltage difference
+inside and outside a neuron. The model is quite simple, we can give some
+input to the neuron, in the form of an electrical current, and we can
+observe how the voltage across the membrane changes over time.</p>
 
 <p>Before the experiments of Hodgin and Huxley the <em>integrate-and-fire</em>
 neuron model (note that the <em>leaky</em> part is missing) had already been
@@ -174,7 +173,7 @@ previous posts on <a href="/2016/04/25/percolation-with-inhibition/">bootstrap p
 spikes in order to spike itself it is even allowed that these two spikes
 come a year apart from each other. In reality this is a different story
 and any trace of the first spike would vanish a few milliseconds later.
-Do note however that integrate-and-fire models are still useful, for
+Note however that integrate-and-fire models are still useful, for
 example when modelling phenomena which occurs at a very short timescale.</p>
 
 <p>The fact that neurons forget old spikes corresponds to the <em>leaky</em> part
@@ -248,7 +247,8 @@ purposes. If you want to run large scale simulations using this type of
 neuron you can do so using the
 <a href="http://www.nest-initiative.org/">nest-simulator</a> and the
 <a href="https://github.com/nest/nest-simulator/blob/master/models/iaf_cond_exp.cpp"><script type="math/tex">\mathtt{iaf\_cond\_exp}</script></a>
-neuron model (the parameters chosen are from there).</p>
+neuron model <a href="#meffin2004analytical">(Meffin, Burkitt, &amp; Grayden, 2004)</a> where the parameters are
+from.</p>
 
 <div id="neuron"></div>
 
@@ -463,6 +463,11 @@ neuron.append("text").attr("text-anchor", "middle")
   .attr("font-size",14);
 
 </script>
+
+<h2 id="references">References</h2>
+
+<ol class="bibliography"><li><span id="hodgkin1952quantitative">Hodgkin, A. L., &amp; Huxley, A. F. (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. <i>The Journal Of Physiology</i>, <i>117</i>(4), 500.</span></li>
+<li><span id="meffin2004analytical">Meffin, H., Burkitt, A. N., &amp; Grayden, D. B. (2004). An analytical model for the ‘large, fluctuating synaptic conductance state’typical of neocortical neurons in vivo. <i>Journal Of Computational Neuroscience</i>, <i>16</i>(2), 159–175.</span></li></ol>
 
 
 </div>

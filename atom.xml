@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-05-16T17:55:11+02:00</updated>
+ <updated>2016-05-16T18:06:23+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -43,11 +43,10 @@ It is inspired by
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Squid_giant_axon&quot;&gt;experiments&lt;/a&gt;, first
 carried out by
 &lt;a href=&quot;https://en.wikipedia.org/wiki/Alan_Lloyd_Hodgkin&quot;&gt;Hodgin&lt;/a&gt; and
-&lt;a href=&quot;https://en.wikipedia.org/wiki/Andrew_Huxley&quot;&gt;Huxley&lt;/a&gt; in the 1950s,
-which measure the voltage difference inside and outside a neuron. The
-model is quite simple, we can give some input to the neuron, in the form
-of an electrical current, and we can observe how the voltage across the
-membrane changes over time.&lt;/p&gt;
+&lt;a href=&quot;https://en.wikipedia.org/wiki/Andrew_Huxley&quot;&gt;Huxley&lt;/a&gt; in the 1950s &lt;a href=&quot;#hodgkin1952quantitative&quot;&gt;(Hodgkin &amp;amp; Huxley, 1952)&lt;/a&gt;, which measure the voltage difference
+inside and outside a neuron. The model is quite simple, we can give some
+input to the neuron, in the form of an electrical current, and we can
+observe how the voltage across the membrane changes over time.&lt;/p&gt;
 
 &lt;p&gt;Before the experiments of Hodgin and Huxley the &lt;em&gt;integrate-and-fire&lt;/em&gt;
 neuron model (note that the &lt;em&gt;leaky&lt;/em&gt; part is missing) had already been
@@ -57,7 +56,7 @@ previous posts on &lt;a href=&quot;/2016/04/25/percolation-with-inhibition/&quot
 spikes in order to spike itself it is even allowed that these two spikes
 come a year apart from each other. In reality this is a different story
 and any trace of the first spike would vanish a few milliseconds later.
-Do note however that integrate-and-fire models are still useful, for
+Note however that integrate-and-fire models are still useful, for
 example when modelling phenomena which occurs at a very short timescale.&lt;/p&gt;
 
 &lt;p&gt;The fact that neurons forget old spikes corresponds to the &lt;em&gt;leaky&lt;/em&gt; part
@@ -131,7 +130,8 @@ purposes. If you want to run large scale simulations using this type of
 neuron you can do so using the
 &lt;a href=&quot;http://www.nest-initiative.org/&quot;&gt;nest-simulator&lt;/a&gt; and the
 &lt;a href=&quot;https://github.com/nest/nest-simulator/blob/master/models/iaf_cond_exp.cpp&quot;&gt;&lt;script type=&quot;math/tex&quot;&gt;\mathtt{iaf\_cond\_exp}&lt;/script&gt;&lt;/a&gt;
-neuron model (the parameters chosen are from there).&lt;/p&gt;
+neuron model &lt;a href=&quot;#meffin2004analytical&quot;&gt;(Meffin, Burkitt, &amp;amp; Grayden, 2004)&lt;/a&gt; where the parameters are
+from.&lt;/p&gt;
 
 &lt;div id=&quot;neuron&quot;&gt;&lt;/div&gt;
 
@@ -346,6 +346,11 @@ neuron.append(&quot;text&quot;).attr(&quot;text-anchor&quot;, &quot;middle&quot;
   .attr(&quot;font-size&quot;,14);
 
 &lt;/script&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;hodgkin1952quantitative&quot;&gt;Hodgkin, A. L., &amp;amp; Huxley, A. F. (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. &lt;i&gt;The Journal Of Physiology&lt;/i&gt;, &lt;i&gt;117&lt;/i&gt;(4), 500.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;meffin2004analytical&quot;&gt;Meffin, H., Burkitt, A. N., &amp;amp; Grayden, D. B. (2004). An analytical model for the ‘large, fluctuating synaptic conductance state’typical of neocortical neurons in vivo. &lt;i&gt;Journal Of Computational Neuroscience&lt;/i&gt;, &lt;i&gt;16&lt;/i&gt;(2), 159–175.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
 
 </content>
  </entry>
