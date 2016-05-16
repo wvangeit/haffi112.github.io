@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-05-16T18:06:23+02:00</updated>
+ <updated>2016-05-16T18:38:28+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -986,7 +986,7 @@ frozen.&lt;/p&gt;
     &lt;label for=&quot;nodeCount&quot;&gt;Number of positive vertices (green)&lt;/label&gt;
     &lt;/td&gt;
     &lt;td&gt;
-      &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
+      &lt;input id=&quot;nodeCount&quot; type=&quot;text&quot; value=&quot;30&quot; style=&quot;width: 50px;&quot; /&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
@@ -994,7 +994,7 @@ frozen.&lt;/p&gt;
     &lt;label for=&quot;inodeCount&quot;&gt;Number of negative vertices (red) &lt;/label&gt;
     &lt;/td&gt;
     &lt;td&gt;
-      &lt;input id=&quot;inodeCount&quot; type=&quot;text&quot; value=&quot;50&quot; style=&quot;width: 50px;&quot; /&gt;
+      &lt;input id=&quot;inodeCount&quot; type=&quot;text&quot; value=&quot;30&quot; style=&quot;width: 50px;&quot; /&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
   &lt;tr&gt;
