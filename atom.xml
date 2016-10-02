@@ -4,7 +4,7 @@
  <title>Hafsteinn</title>
  <link href="http://haffi112.github.io/atom.xml" rel="self"/>
  <link href="http://haffi112.github.io/"/>
- <updated>2016-09-26T13:13:13+02:00</updated>
+ <updated>2016-10-02T15:27:20+02:00</updated>
  <id>http://haffi112.github.io</id>
  <author>
    <name>Hafsteinn Einarsson</name>
@@ -349,8 +349,8 @@ neuron.append(&quot;text&quot;).attr(&quot;text-anchor&quot;, &quot;middle&quot;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
-&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;hodgkin1952quantitative&quot;&gt;Hodgkin, A. L., &amp;amp; Huxley, A. F. (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. &lt;i&gt;The Journal Of Physiology&lt;/i&gt;, &lt;i&gt;117&lt;/i&gt;(4), 500.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;meffin2004analytical&quot;&gt;Meffin, H., Burkitt, A. N., &amp;amp; Grayden, D. B. (2004). An analytical model for the ‘large, fluctuating synaptic conductance state’typical of neocortical neurons in vivo. &lt;i&gt;Journal Of Computational Neuroscience&lt;/i&gt;, &lt;i&gt;16&lt;/i&gt;(2), 159–175.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;hodgkin1952quantitative&quot;&gt;Hodgkin, A. L., &amp;amp; Huxley, A. F. (1952). A quantitative description of membrane current and its application to conduction and excitation in nerve. &lt;i&gt;The Journal of Physiology&lt;/i&gt;, &lt;i&gt;117&lt;/i&gt;(4), 500.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;meffin2004analytical&quot;&gt;Meffin, H., Burkitt, A. N., &amp;amp; Grayden, D. B. (2004). An analytical model for the ‘large, fluctuating synaptic conductance state’typical of neocortical neurons in vivo. &lt;i&gt;Journal of Computational Neuroscience&lt;/i&gt;, &lt;i&gt;16&lt;/i&gt;(2), 159–175.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
 
 </content>
  </entry>
@@ -636,7 +636,7 @@ function setup(num_exp) {
     .attr(&quot;dy&quot;, 3.3*height/4.0)
     .attr(&quot;font-size&quot;, &quot;14px&quot;)
     .attr(&quot;fill&quot;, fill.range()[16])
-    .text(function(){return &quot;Number of times we didn&#39;t reach &quot;+kThresh+&quot;: &quot;+numFail;});
+    .text(function(){return &quot;Number of times we didn't reach &quot;+kThresh+&quot;: &quot;+numFail;});
 
   var statistics_summary = svg.append(&quot;text&quot;)
     .attr(&quot;dx&quot;, margin/2.0)
@@ -660,7 +660,7 @@ function setup(num_exp) {
       numFail++;
       tick(numFinish/(numFinish+numFail));
       statistics_fail
-        .text(function(){return &quot;Number of times we didn&#39;t reach &quot;+kThresh+&quot;: &quot;+numFail;});
+        .text(function(){return &quot;Number of times we didn't reach &quot;+kThresh+&quot;: &quot;+numFail;});
       statistics_summary
         .text(function(){return &quot;Estimated probability of reaching &quot;+kThresh+&quot; in &quot;+max_steps+&quot; steps: &quot;+numFinish/(numFail+numFinish);});
       transition(kThresh);
@@ -830,11 +830,11 @@ function setup(num_exp) {
 setup(trial);
 
 function change_params() {
-    speed = parseInt(document.getElementById(&#39;delay&#39;).value);
-    n_ex = parseInt(document.getElementById(&#39;nodeCount&#39;).value);
-    n_in = parseInt(document.getElementById(&#39;inodeCount&#39;).value);
-    max_steps = parseInt(document.getElementById(&#39;maximumSteps&#39;).value);
-    kThresh = parseInt(document.getElementById(&#39;kPerc&#39;).value);
+    speed = parseInt(document.getElementById('delay').value);
+    n_ex = parseInt(document.getElementById('nodeCount').value);
+    n_in = parseInt(document.getElementById('inodeCount').value);
+    max_steps = parseInt(document.getElementById('maximumSteps').value);
+    kThresh = parseInt(document.getElementById('kPerc').value);
     trial++;
     setup(trial);
     return;
@@ -1156,7 +1156,7 @@ process with inhibitory vertices.&lt;/p&gt;
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
 &lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
 
 </content>
  </entry>
@@ -1342,11 +1342,11 @@ draft of this post.&lt;/p&gt;
 
 &lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
 
-&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;amini2014inhomogeneous&quot;&gt;Amini, H., &amp;amp; Minca, A. (2014). Inhomogeneous Financial Networks and Contagious Links. &lt;i&gt;Available At SSRN&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;chalupa1979bootstrap&quot;&gt;Chalupa, J., Leath, P. L., &amp;amp; Reich, G. R. (1979). Bootstrap percolation on a Bethe lattice. &lt;i&gt;Journal Of Physics C: Solid State Physics&lt;/i&gt;, &lt;i&gt;12&lt;/i&gt;(1), L31.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;balogh2012sharp&quot;&gt;Balogh, J., Bollobás, B., Duminil-Copin, H., &amp;amp; Morris, R. (2012). The sharp threshold for bootstrap percolation in all dimensions. &lt;i&gt;Transactions Of the American Mathematical Society&lt;/i&gt;, &lt;i&gt;364&lt;/i&gt;(5), 2667–2701.&lt;/span&gt;&lt;/li&gt;
+&lt;ol class=&quot;bibliography&quot;&gt;&lt;li&gt;&lt;span id=&quot;amini2014inhomogeneous&quot;&gt;Amini, H., &amp;amp; Minca, A. (2014). Inhomogeneous Financial Networks and Contagious Links. &lt;i&gt;Available at SSRN&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;chalupa1979bootstrap&quot;&gt;Chalupa, J., Leath, P. L., &amp;amp; Reich, G. R. (1979). Bootstrap percolation on a Bethe lattice. &lt;i&gt;Journal of Physics C: Solid State Physics&lt;/i&gt;, &lt;i&gt;12&lt;/i&gt;(1), L31.&lt;/span&gt;&lt;/li&gt;
+&lt;li&gt;&lt;span id=&quot;balogh2012sharp&quot;&gt;Balogh, J., Bollobás, B., Duminil-Copin, H., &amp;amp; Morris, R. (2012). The sharp threshold for bootstrap percolation in all dimensions. &lt;i&gt;Transactions of the American Mathematical Society&lt;/i&gt;, &lt;i&gt;364&lt;/i&gt;(5), 2667–2701.&lt;/span&gt;&lt;/li&gt;
 &lt;li&gt;&lt;span id=&quot;einarsson2014bootstrap&quot;&gt;Einarsson, H., Lengler, J., Panagiotou, K., Mousset, F., &amp;amp; Steger, A. (2014). Bootstrap percolation with inhibition. &lt;i&gt;ArXiv Preprint ArXiv:1410.3291&lt;/i&gt;.&lt;/span&gt;&lt;/li&gt;
-&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals Of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
+&lt;li&gt;&lt;span id=&quot;janson2012bootstrap&quot;&gt;Janson, S., Łuczak, T., Turova, T., &amp;amp; Vallier, T. (2012). Bootstrap percolation on the random graph  G_ {n, p} . &lt;i&gt;The Annals of Applied Probability&lt;/i&gt;, &lt;i&gt;22&lt;/i&gt;(5), 1989–2047.&lt;/span&gt;&lt;/li&gt;&lt;/ol&gt;
 
 </content>
  </entry>
